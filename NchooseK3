@@ -1,0 +1,58 @@
+/*
+Jon Woodring 
+Professor Haynes 
+https://github.com/JonLWoodring/Intro-To-Computing-Systems1/NchooseK3
+
+*/
+
+import java.util.*;
+import java.util.Scanner;
+public class NchooseK3 
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int dataSetSize;
+		int numbersChosen;
+		System.out.println("Input N and K");
+		dataSetSize = keyboard.nextInt();
+		numbersChosen = keyboard.nextInt();
+		int[] rndmArray = new int[dataSetSize];
+		Random rndm = new Random();
+	
+			for(int y = 0; y < rndmArray.length; y++)
+			{
+				rndmArray[y] = rndm.nextInt(100) + 1; ;
+			}
+			System.out.println("The data set is:");
+			for(int t = 0; t < rndmArray.length; t++)
+				System.out.print(" " + rndmArray[t]);
+			
+			System.out.println();
+			
+			System.out.println("The random values are:");
+			
+			int randomDraw;
+			int randomArrayIndex;
+			int move;
+			int arraySize = rndmArray.length - 1;
+			long curTime = System.nanoTime();
+			for(int x = 0; x < numbersChosen; x++)
+			{
+					randomArrayIndex = rndm.nextInt(arraySize);
+					randomDraw = rndmArray[randomArrayIndex];
+					move = rndmArray[arraySize];
+					rndmArray[arraySize] =  randomDraw;
+					rndmArray[randomArrayIndex] = move;
+					arraySize -= 1;
+			}
+			curTime = System.nanoTime() - curTime;
+			
+			for(int z = dataSetSize - numbersChosen; z < dataSetSize; z++)
+				System.out.print(" " + rndmArray[z]);
+			
+			System.out.println();
+			
+			System.out.println(curTime);
+	}
+}

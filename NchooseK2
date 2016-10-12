@@ -1,0 +1,59 @@
+/*
+/*
+Jon Woodring 
+Professor Haynes 
+https://github.com/JonLWoodring/Intro-To-Computing-Systems1/NchooseK2
+
+*/
+
+*/
+
+import java.util.*;
+public class NchooseK2 
+{
+	public static void main(String[] args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int dataSetSize;
+		int numbersChosen;
+		System.out.println("Input N and K");
+		dataSetSize = keyboard.nextInt();
+		numbersChosen = keyboard.nextInt();
+		int[] rndmArray = new int[dataSetSize];
+		Random rndm = new Random();
+		int[] chosen = new int[numbersChosen];
+	
+			for(int y = 0; y < dataSetSize; y++)
+			{
+				rndmArray[y] = rndm.nextInt(100) + 1; ;
+			}
+			System.out.println("The data set is:");
+			for(int t = 0; t < dataSetSize; t++)
+				System.out.print(" " + rndmArray[t]);
+			
+			System.out.println();
+			System.out.println("The random values are:");
+			
+			int randomArrayIndex;
+			long curTime = System.nanoTime();
+			for(int x = 0; x < chosen.length; x++)
+			{
+				randomArrayIndex = rndm.nextInt(10);
+				chosen[x] = randomArrayIndex;
+					for(int y = 0; y < x; y++)
+					{
+						if(chosen[x] == chosen[y])
+						{
+							randomArrayIndex = rndm.nextInt(dataSetSize);
+							chosen[x] = randomArrayIndex;
+						}
+					}				
+			}
+			curTime = System.nanoTime() - curTime;
+			
+			for(int x = 0; x < chosen.length; x++)
+				System.out.print(" " +rndmArray[chosen[x]]);
+			System.out.println();
+			System.out.println("Execution time " + curTime);
+	}
+}			

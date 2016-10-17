@@ -1,6 +1,8 @@
 /*
  * Jon Woodring
-
+ https://github.com/JonLWoodring/Data-Structures-and-Algorithms/blob/master/MaxValInStack
+ Lab 4 
+ Professor Haynes
  */
 import java.util.Scanner;
 public class MaxValInStack 

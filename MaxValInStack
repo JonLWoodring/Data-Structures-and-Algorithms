@@ -1,0 +1,92 @@
+/*
+ * Jon Woodring
+
+ */
+import java.util.Scanner;
+public class MaxValInStack 
+{
+	public static void main(String[] args)
+	{
+		int[] stack = new int[20];
+		int max = 0;
+		int compare;
+		Scanner keyboard = new Scanner(System.in);
+		int theNumToPush;
+		int choice; 
+		boolean running = true;
+		while(running)
+		{
+			System.out.println("1 for push, 2 pop, 3 find max");
+			choice = keyboard.nextInt();
+			if(choice == 1)
+			{
+				System.out.println("Enter num to push");
+				theNumToPush = keyboard.nextInt();
+				push(theNumToPush, stack);
+			}
+			else if(choice == 2)
+			{
+				System.out.println(pop(stack));
+			}
+			else if(choice == 3)
+			{
+				if(isEmpty(stack) == false)
+				{	
+					for(int z = 0; z < stack.length - 1; z++)
+					{
+						compare = pop(stack);
+						if(max < compare)
+						{
+						max = compare;
+						}
+					}
+						System.out.println(max);
+						running = false;
+				}
+				else
+				{
+					System.out.println("The stack is empty");
+				}
+			}
+		}
+	}
+	
+	public static void push(int numToPush, int[] theStack)
+	{
+		int move;
+			
+			for(int x = theStack.length - 1; x > 0; x--)
+			{
+				move = theStack[x - 1];
+				theStack[x] = move;
+			}
+			
+		theStack[0] = numToPush;
+	}
+	
+	public static int pop(int[] theStack)
+	{		
+		
+		int pop = theStack[0];	
+		theStack[0] = 0;
+		int move;
+		for(int x = 0; x < theStack.length - 1; x++)
+		{
+			move = theStack[x + 1];
+			theStack[x] = move;
+		}
+		return pop;
+	}
+	
+	public static boolean isEmpty(int[] theStack)
+	{
+		if(theStack[0] == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}

@@ -1,0 +1,98 @@
+public class BSTBalance
+{
+	public static void main(String[] args)
+	{
+		int[] BST = {10, 5, 15, 3, 13, 17, 18, 22, 21};
+		int temp = 0;
+		for(int x = 0; x < BST.length; x++)
+		{
+			for(int y = 0; y < BST.length; y++)
+			{
+				if(BST[x] < BST[y])
+				{
+					temp = BST[x];
+					BST[x] = BST[y];
+					BST[y] = temp;
+				}
+			}
+		}
+		Node treeRoot = buildBST(BST);
+		System.out.println("The balance is " + computeBalance(treeRoot));
+		
+	}
+	 public static Node buildBST(int array[])
+	 {
+		 return buildBST(array, 0, array.length-1);
+	 }
+	public static Node buildBST(int[] BST, int start, int end)
+	{
+		if(start > end) 
+		{
+			return null; 
+			
+		}
+		int mid = (start + end) / 2; 
+		Node root = new Node(BST[mid]);
+	
+		    root.setLeft(buildBST(BST, start, mid - 1)); 
+			root.setRight(buildBST(BST, mid + 1, end));
+		
+		
+		return root;
+	}
+	
+	public static int computeBalance(Node treeRoot)
+	{
+	   if (treeRoot == null) 
+	   {
+	       return 0;
+	   }
+	   else
+	   {
+	       int leftHeight = computeBalance(treeRoot.getLeft()) + 1;
+	       int rightHeight = computeBalance(treeRoot.getRight()) + 1; 
+	       return rightHeight - leftHeight;
+
+	   }
+	} 
+		 	
+}
+
+
+	class Node {
+ 
+ 
+    private int data;
+    private Node left;
+    private Node right;
+     
+    public int getData() {
+        return data;
+    }
+ 
+    public void setData(int data) {
+        this.data = data;
+    }
+ 
+    public Node getLeft() {
+        return left;
+    }
+ 
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+ 
+    public Node getRight() {
+        return right;
+    }
+ 
+    public void setRight(Node right) {
+        this.right = right;
+    }
+ 
+    public Node(int data) {
+        super();
+        this.data = data;
+    }
+ 
+}

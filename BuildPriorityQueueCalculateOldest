@@ -1,3 +1,10 @@
+/*
+*Jon Woodring
+*Professor Haynes
+*11/28/2016
+*https://github.com/JonLWoodring/Data-Structures-and-Algorithms/BuildPriorityQueueCalculateOldest
+*/
+
 public class PriorityQueue
 {
 	public static void main(String[] args)

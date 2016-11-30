@@ -4,21 +4,21 @@
 *11/28/2016
 *https://github.com/JonLWoodring/Data-Structures-and-Algorithms/BuildPriorityQueueCalculateOldest
 */
-
 public class PriorityQueue
 {
+	static int count = 0;
 	public static void main(String[] args)
 	{
 		int[] insertedValues = {1, 7, 3, 4, 5, 6, 1, 2, 3};
 	
-		buildQueueCalcOldest(insertedValues);
+		Node oldestData = oldestData(insertedValues);
+		System.out.println("The data at " + oldestData.getData() + ", is the oldest data with timestamp " + oldestData.getTS());
 		
 	}
-	public static void buildQueueCalcOldest(int[] array)
+	public static Node buildQueue(int[] array)
 	{
 		Node root = new Node(array[0]);
 		Node p = root;
-		int count = 0;
 		root.setTS(0);
 		Node q;
 		for(int x = 1; x < array.length; x++)
@@ -61,15 +61,27 @@ public class PriorityQueue
 				}
 			}
 		}
-		count++;
+			return root; 
+	
+	}
+	public static Node oldestData(int[] insertedValues)
+	{
+		
+		Node root = buildQueue(insertedValues);
 		Node oldest = root;
 		Node t = root;
 		int currVal = count - t.getTS();
 		oldest.setTS(currVal);
-		for(int x = 1; x < array.length; x++)
+		Node u;
+		for(int x = 1; x < insertedValues.length; x++)
 		{
+			
 			count++;
 			t = t.getNext();
+			u = t.getLast();
+			u.setNext(null);
+			u.setLast(null);
+			root = t;
 			currVal = count - t.getTS();
 			if(currVal > oldest.getTS())
 			{
@@ -79,7 +91,6 @@ public class PriorityQueue
 			}
 
 		}
-		System.out.println("The oldest element is " + oldest.getData() + ", with timestamp " + oldest.getTS());
+		return oldest;
 	}
 }
-	

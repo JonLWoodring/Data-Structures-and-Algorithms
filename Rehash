@@ -1,3 +1,10 @@
+/*
+ * Jon Woodring 
+ * 12/5/2016
+ * Professor Haynes 
+ * https://github.com/JonLWoodring/Data-Structures-and-Algorithms/Rehash
+ */
+
 public class Rehash
 {
 	public static void main(String[] args)

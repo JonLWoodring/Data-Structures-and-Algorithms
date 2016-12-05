@@ -1,0 +1,64 @@
+public class Rehash
+{
+	public static void main(String[] args)
+	{
+		String[] input = {"ikeji", "bahorski", "chaudhuri", "evett", "haynes", "maniccam", "moore", "narayanan", "panja", "poh", "sverdlik", "tehranipour", "zeiger", "zhang", "cowan", "francis", "mansour"};
+		int hashCode = 0;
+		int count = 0;
+		boolean SpotTaken;
+		int inputLength = input.length;
+		
+							
+		String[] hashTable = new String[15];
+			for(int x = 0; x < inputLength; x++)
+			{
+				hashCode = input[x].hashCode();
+				hashCode = hashCode % 10;
+		
+			
+				if(hashCode < 0)
+				{
+					hashCode = hashCode - (hashCode * 2);
+			
+				}
+				
+				if(hashTable[hashCode] == null)
+				{
+					hashTable[hashCode] = input[x];
+				}
+				else
+				{
+					SpotTaken = true;
+					while(SpotTaken == true)
+					{
+						hashCode += 1;
+						if(hashTable[hashCode] == null)
+						{
+							hashTable[hashCode] = input[x];
+							SpotTaken = false;
+						}
+					}
+				}
+				count++;
+				if(count > hashTable.length * .75)
+				{
+					String[] saveInput = new String[input.length];
+					for(int t = 0; t < saveInput.length; t++)
+					{
+						saveInput[t] = input[t];
+					}
+					hashTable = new String[hashTable.length * 2];
+					input = new String[input.length * 2];
+					for(int t = 0; t < saveInput.length; t++)
+					{
+						input[t] = saveInput[t];
+					}
+					x = 0;
+				}
+			}
+		for(int y = 0; y < hashTable.length; y++)
+		{
+			System.out.println(hashTable[y]);
+		}
+	}
+}

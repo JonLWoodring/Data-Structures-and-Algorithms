@@ -1,0 +1,86 @@
+public class PriorityQueue
+{
+	public static void main(String[] args)
+	{
+		
+		int[] insertedValues = {18, 9, 12, 56, 75, 48, 96, 49, 9, 1, 56, 85, 89, 34, 98, 37, 65, 87, 23, 65, 76, 87, 12, 45, 67, 61, 45, 79, 76};
+	
+		Node oldestData = oldestData(insertedValues);
+		System.out.println("The data at " + oldestData.getData() + ", is the oldest data with timestamp " + oldestData.getTS());
+		
+	}
+	public static Node buildQueue(int[] array)
+	{
+		Node root = new Node(array[0]);
+		Node p = root;
+		root.setTS(System.nanoTime());
+		Node q;
+		for(int x = 1; x < array.length; x++)
+		{
+			p = root;
+			Node next = new Node(array[x]);
+			next.setTS(System.nanoTime());
+			
+			if(next.getData() <= root.getData())
+			{
+				next.setNext(root);
+				root.setLast(next);
+				root = next;
+				
+			}
+			else if(next.getData() > root.getData())
+			{
+				while(next.getData() >= p.getData())
+				{
+					if(p.getNext() == null)
+					{
+						break;
+					}
+					p = p.getNext();	
+					
+				}
+				if(p.getNext() == null && next.getData() > p.getData())
+				{
+					p.setNext(next);
+					next.setLast(p);
+					next.setNext(null);
+				}
+				else
+				{
+					q = p.getLast();
+					q.setNext(next);
+					p.setLast(next);
+					next.setNext(p);
+					next.setLast(q);
+				}
+			}
+		}
+			return root; 
+	
+	}
+	public static Node oldestData(int[] insertedValues)
+	{
+		Node root = buildQueue(insertedValues);
+		Node oldest = root;
+		Node t = root;
+		t.setTS(System.nanoTime() - t.getTS());
+		Node u;
+		for(int x = 1; x < insertedValues.length; x++)
+		{
+			t = t.getNext();
+			t.setTS(System.nanoTime() - t.getTS());
+			u = t.getLast();
+			u.setNext(null);
+			u.setLast(null);
+			root = t;
+			long timeOfCurrElement = t.getTS();
+			if(timeOfCurrElement > oldest.getTS())
+			{
+				oldest = t;
+			}
+
+		}
+		return oldest;
+	}
+}
+	

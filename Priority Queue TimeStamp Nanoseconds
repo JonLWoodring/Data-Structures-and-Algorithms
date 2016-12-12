@@ -1,3 +1,9 @@
+/*
+* Jon Woodring
+* Professor Haynes
+* https://github.com/JonLWoodring/Data-Structures-and-Algorithms/Priority%20Queue%20TimeStamp%20Nanoseconds
+*/
+
 public class PriorityQueue
 {
 	public static void main(String[] args)
